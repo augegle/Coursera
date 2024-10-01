@@ -3,21 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My GitHub Website</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            text-align: center;
-            padding: 50px;
-        }
-        h1 {
-            color: #333;
-        }
-    </style>
+    <title>Survey Form</title>
+    <!-- External CSS File -->
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <h1>Welcome to My GitHub Page!</h1>
-    <p>This website is hosted using GitHub Pages.</p>
+
+<div class="form-container">
+    <h1>Your Feedback</h1>
+    <form id="surveyForm">
+        <label for="answer">What do you think about our service?</label>
+        <textarea id="answer" name="answer" rows="5" required></textarea>
+        <button type="submit">Submit</button>
+    </form>
+    <div class="footer">Thank you for your feedback!</div>
+</div>
+
+<!-- External JavaScript File -->
+<script src="js/script.js"></script>
+
 </body>
 </html>
