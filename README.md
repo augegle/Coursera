@@ -1,1 +1,113 @@
-# Coursera
+# <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: none;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h1>Your Feedback</h1>
+    <form id="surveyForm">
+        <label for="answer">What do you think about our service?</label>
+        <textarea id="answer" name="answer" rows="5" required></textarea>
+        <button type="submit">Submit</button>
+    </form>
+    <div class="footer">Thank you for your feedback!</div>
+</div>
+
+<script>
+    document.getElementById("surveyForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        
+        const answer = document.getElementById("answer").value;
+
+        if (answer.trim() === "") {
+            alert("Please provide an answer.");
+            return;
+        }
+
+        // Send data to Google Apps Script Web App
+        fetch('https://script.google.com/macros/s/AKfycbwD-BRAghi09VkC6ll16ttcKvyO5BRYwCHdjSyK0_b1eBWagDyJOWi0aJlOSFB-Qf0-/exec', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({answer: answer}),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            alert("Your answer has been submitted!");
+            document.getElementById("surveyForm").reset();
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            alert("There was an error submitting your answer.");
+        });
+    });
+</script>
+
+</body>
+</html>
